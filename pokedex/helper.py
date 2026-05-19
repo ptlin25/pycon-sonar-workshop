@@ -36,4 +36,3 @@ def register_subscriber(wrapper: ConnectionWrapper, email):
     if not pattern.match(email):
         raise ValueError("Invalid email!")
     wrapper.register_subscriber(email)
-    pass
