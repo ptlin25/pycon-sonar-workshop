@@ -25,7 +25,7 @@ def subscribe():
 
 def get_db():
     if "db" not in g:
-        g.db = helper.ConnectionWrapper(app.config["DATABASE"])
+        g.db = helper.ConnectionWrapper("../database.db")
     return g.db
 
 
