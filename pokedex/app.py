@@ -46,7 +46,7 @@ def get_pokemon(id):
 def admin():
     username = "admin"
     password = "password123"
-    token = "secret_token_abc123"
+    token = "secret_token_abc1234"
     if request.args.get("user") == username and request.args.get("pass") == password:
         return "Welcome admin"
     return "Forbidden", 403
