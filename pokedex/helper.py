@@ -16,10 +16,11 @@ class ConnectionWrapper:
         try:
             self.__conn.execute("INSERT into SUBSCRIBERS(email) values (?)", (email,))
             self.__conn.commit()
-        except sqlite3.DatabaseError:
-            raise Exception("Problem with the database!")
         except sqlite3.IntegrityError:
             raise ValueError("Email already exists!")
+        except sqlite3.DatabaseError:
+            raise RuntimeError("Problem with the database!")
+        
 
     def cleanup(self, should_close: bool):
         if should_close:
@@ -33,6 +34,6 @@ def fetch_all_pokemons(wrapper: ConnectionWrapper):
 def register_subscriber(wrapper: ConnectionWrapper, email):
     pattern = re.compile(r"(.*)@(.*\..*)")
     if not pattern.match(email):
-        ValueError("Invalid email!")
+        raise ValueError("Invalid email!")
     wrapper.register_subscriber(email)
     pass
